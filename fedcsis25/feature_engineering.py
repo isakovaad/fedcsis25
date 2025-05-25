@@ -34,7 +34,7 @@ def generate_fen_features(x):
     total_values_w += count_w * value
     total_values_b += count_b * value
     
-  qdiff_pieces = total_pieces_w - total_pieces_b
+  diff_pieces = total_pieces_w - total_pieces_b
   total_pieces = total_pieces_b + total_pieces_w
   diff_values = total_values_w - total_values_b
   total_values = total_values_w + total_values_b
