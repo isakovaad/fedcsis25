@@ -3,6 +3,45 @@ import time
 import pandas as pd
 import numpy as np
 
+feature_names = []
+
+# 5 piece‐types × 4 stats each = 20
+for p in ['Q','R','B','N','P']:
+    feature_names += [
+      f"{p}_w_count",    # how many White p’s
+      f"{p}_b_count",    # how many Black p’s
+      f"{p}_diff",       # white minus black
+      f"{p}_total"       # white + black
+    ]
+
+# aggregates: piece counts (4), material values (4) → 8 more
+feature_names += [
+    "total_pieces_w",   # sum of all White non‐king pieces
+    "total_pieces_b",   # sum of all Black non‐king pieces
+    "diff_pieces",      # white minus black piece‐count
+    "total_pieces",     # total non‐king pieces on board
+    "total_val_w",      # material value of White’s pieces
+    "total_val_b",      # material value of Black’s pieces
+    "diff_values",      # white minus black material
+    "total_values"      # total material on board
+]
+
+# move‐flags, castling, en passant, clocks → 12 more
+feature_names += [
+    "active",           # 1 if White to move, else 0
+    "en_passant",       # 1 if an en‐passant square exists
+    "castling_wk",      # White can castle kingside?
+    "castling_wq",      # White can castle queenside?
+    "total_castling_w", # White’s total castling rights (0–2)
+    "castling_bk",      # Black kingside?
+    "castling_bq",      # Black queenside?
+    "total_castling_b", # Black’s total (0–2)
+    "diff_castling",    # white minus black rights
+    "total_castling",   # total castling rights on both sides
+    "halfmove_clock",   # half‐move clock for 50‐move rule
+    "fullmove_number"   # move number in the game
+]
+
 
 # list of pieces in a board
 pieces_black = ['q', 'r', 'b', 'n', 'p']
@@ -13,6 +52,9 @@ pieces_complexity = [12, 7, 5, 4, 1]
 '''
 generate features from the initial 'FEN' value
 '''
+def hello_world():
+  return "hello!"
+
 
 def generate_fen_features(x):
   output = []
@@ -69,7 +111,7 @@ def generate_fen_features(x):
       halfmove_clock, fullmove_num
     ])
     
-  return pd.Series(output)
+  return pd.Series(output, index=feature_names)
     
     
   
