@@ -50,7 +50,7 @@ class FenParserTest(TestCase):
   def test_parse_starting_position(self):
     start_pos = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
     fp = FenParser(start_pos)
-    print fp.parse()
+    print (fp.parse())
     assert len(fp.parse()) == 8
     assert fp.parse() == [["r","n","b","q","k","b","n","r"],
                           ["p","p","p","p","p","p","p","p"],
@@ -60,3 +60,5 @@ class FenParserTest(TestCase):
                           [" "," "," "," "," "," "," "," "],
                           ["P","P","P","P","P","P","P","P"],
                           ["R","N","B","Q","K","B","N","R"]]
+    
+    
